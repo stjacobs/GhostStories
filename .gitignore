@@ -2,3 +2,5 @@ Library/
 ProjectSettings/
 Temp/
 *.meta
+*.exe
+*_Data/
