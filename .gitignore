@@ -3,3 +3,7 @@ ProjectSettings/
 Temp/
 *.exe
 *_Data/
+.vs/
+Assembly-CSharp.csproj
+*.userprefs
+obj/
