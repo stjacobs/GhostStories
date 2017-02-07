@@ -7,3 +7,4 @@ Temp/
 Assembly-CSharp.csproj
 *.userprefs
 obj/
+*.sln
