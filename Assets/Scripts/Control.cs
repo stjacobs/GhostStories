@@ -12,7 +12,8 @@ public class Control : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cameraControl = GameObject.Find("Main Camera").GetComponent<CameraControl> ();
+		cameraControl = GameObject.Find("Main Camera").GetComponent<CameraControl>();
+		print (cameraControl);
 	}
 
 	void Update() {
@@ -24,7 +25,28 @@ public class Control : MonoBehaviour {
 		transform.position = transform.position + new Vector3 (xDelta / 10, yDelta / 10);
 		xDelta = 0;
 		yDelta = 0;
-		cameraControl.updatePosition (this);
+	}
+
+	void OnBecameInvisible() {
+		cameraControl.move (getMoveDirection());
+	}
+
+	private Direction getMoveDirection() {
+		Vector3 cameraPos = cameraControl.getPosition ();
+		Vector3 playerPos = transform.position;
+		if (playerPos.x < cameraPos.x - (cameraControl.getWidth() / 2)) {
+			return Direction.LEFT;
+		}
+		if (playerPos.x > cameraPos.x + (cameraControl.getWidth() / 2)) {
+			return Direction.RIGHT;
+		}
+		if (playerPos.y < cameraPos.y - (cameraControl.getHeight() / 2)) {
+			return Direction.DOWN;
+		}
+		if (playerPos.y > cameraPos.y - (cameraControl.getHeight() / 2)) {
+			return Direction.UP;
+		}
+		return Direction.NONE;
 	}
 
 }

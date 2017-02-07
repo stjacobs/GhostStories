@@ -4,43 +4,58 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour {
 
-	private float height = 5; // height from center
-	private float leftWidth = 8.9f;
-	private float rightWidth = 4;
+	private const float height = 9f;
+	private const float width = 12f;
 
 	private void moveUp() {
-		transform.position += new Vector3(0, 10);
+		transform.position += new Vector3(0, height);
 	}
 
 	private void moveDown() {
-		transform.position -= new Vector3(0, 10);
+		transform.position -= new Vector3(0, height);
 	}
 
 	private void moveLeft() {
-		transform.position -= new Vector3(12.9f, 0);
+		transform.position -= new Vector3(width, 0);
 	}
 
 	private void moveRight() {
-		transform.position += new Vector3(12.9f, 0);
+		transform.position += new Vector3(width, 0);
 	}
 
-	public void updatePosition(Control player) {
-		if (player.transform.position.x < transform.position.x - leftWidth) {
-			print ("left");
-			moveLeft();
-		} else if (player.transform.position.x > transform.position.x + rightWidth) {
-			moveRight ();
-			print ("right");
-		} else if (player.transform.position.y < transform.position.y - height) {
+	public void move(Direction direction) {
+		switch (direction) {
+		case Direction.DOWN:
 			moveDown ();
-			print ("down");
-		} else if (player.transform.position.y > transform.position.y + height) {
+			break;
+		case Direction.UP:
 			moveUp ();
-			print ("up");
+			break;
+		case Direction.LEFT:
+			moveLeft ();
+			break;
+		case Direction.RIGHT:
+			moveRight ();
+			break;
 		}
 	}
 
-	public void LateUpdate() {
+	public Vector3 getPosition() {
+		return transform.position;
+	}
+
+
+	// TODO: Figure out how to move camera
+	public void OnTriggerEnter2D(Collider2D coll) {
+		print("COLL");
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() {
+		return height;
 	}
 
 }
